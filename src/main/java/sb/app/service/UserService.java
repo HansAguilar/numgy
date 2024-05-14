@@ -9,4 +9,6 @@ import java.util.Map;
 @Service
 public interface UserService {
     ResponseEntity<Map<String, String>> registerUser(UserDTO user);
+
+    ResponseEntity<Map<String, String>> loginUser(UserDTO user);
 }

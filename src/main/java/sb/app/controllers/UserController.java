@@ -21,16 +21,21 @@ import java.util.Map;
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {
+    private static final String UPLOAD_DIR = "C://Users//Kukis//Desktop//spring-boot-prac//sample-rest//files//";
 
     @Autowired
     private UserService userService;
-
-    private static final String UPLOAD_DIR = "C://Users//Kukis//Desktop//spring-boot-prac//sample-rest//files//";
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody UserDTO userDTO){
         return userService.registerUser(userDTO);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(@RequestBody UserDTO userDTO){
+        return userService.loginUser(userDTO);
+    }
+
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> upload(@RequestParam("file")MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
@@ -71,7 +76,7 @@ public class UserController {
         return redirectView;
     }
 
-    @GetMapping("user/gets")
+    @GetMapping("/gets")
     public String getUserByIDs(@RequestParam(defaultValue = "lol", value = "name") String name) {
         // Create a RestTemplate instance
         RestTemplate restTemplate = new RestTemplate();

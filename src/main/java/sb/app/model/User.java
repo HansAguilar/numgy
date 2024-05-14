@@ -18,6 +18,10 @@ public class User {
     public User(){}
 
     public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.overall_score = 0; // default value
+        this.total_games_played = 0; // default value
     }
 
     public int getId() {
