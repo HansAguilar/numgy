@@ -11,4 +11,6 @@ public interface UserService {
     ResponseEntity<Map<String, String>> registerUser(UserDTO user);
 
     ResponseEntity<Map<String, String>> loginUser(UserDTO user);
+
+    ResponseEntity<Map<String, String>> updateUserHistory(UserDTO user);
 }

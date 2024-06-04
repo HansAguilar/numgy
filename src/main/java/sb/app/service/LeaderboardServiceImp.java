@@ -7,6 +7,7 @@ import sb.app.model.Leaderboard;
 import sb.app.repository.LeaderboardRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -14,25 +15,21 @@ public class LeaderboardServiceImp implements LeaderboardService {
     @Autowired
     private LeaderboardRepository leaderboardRepository;
 
-    @Override
-    public ResponseEntity<Map<String, String>> getRankingByUsername(String username) {
-        Map<String,String> response = new HashMap<>();
-
-        response.put("message", username);
-        return ResponseEntity.ok().body(response);
+    public List<Leaderboard> getAllRanking() {
+        return leaderboardRepository.findAllRank();
     }
 
-//    @Override
-//    public ResponseEntity<Map<String, String>> getRankingByUsername(String username) {
-//        Leaderboard leaderboard = leaderboardRepository.findByUsername(username);
-//
-//        Map<String, String> response = new HashMap<>();
-//        if (leaderboard != null) {
-//            response.put("username", leaderboard.getUsername().getUsername());
-//            return ResponseEntity.ok(response);
-//        } else {
-//            response.put("message", "User not found in leaderboard");
-//            return ResponseEntity.status(404).body(response);
-//        }
-//    }
+    @Override
+    public ResponseEntity<Map<String, String>> getRankingByUsername(String username) {
+        Leaderboard leaderboard = leaderboardRepository.findByUsername(username);
+
+        Map<String, String> response = new HashMap<>();
+        if (leaderboard != null) {
+            response.put("username", leaderboard.getUser().getUsername());
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "User not found in leaderboard");
+            return ResponseEntity.status(404).body(response);
+        }
+    }
 }

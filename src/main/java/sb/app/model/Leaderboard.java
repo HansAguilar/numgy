@@ -8,9 +8,9 @@ public class Leaderboard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int leaderboard_id;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private User username;
+    @OneToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private User user;
 
     public int getLeaderboard_id() {
         return leaderboard_id;
@@ -20,11 +20,11 @@ public class Leaderboard {
         this.leaderboard_id = leaderboard_id;
     }
 
-    public User getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(User username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
