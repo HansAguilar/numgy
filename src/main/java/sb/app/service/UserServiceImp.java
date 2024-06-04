@@ -2,6 +2,7 @@ package sb.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sb.app.dto.UserDTO;
 import sb.app.model.Leaderboard;
@@ -20,6 +21,8 @@ public class UserServiceImp implements UserService{
     @Autowired
     private LeaderboardRepository leaderboardRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public ResponseEntity<Map<String, String>> registerUser(UserDTO userDTO) {
@@ -32,7 +35,8 @@ public class UserServiceImp implements UserService{
         }
 
         else{
-            User _user = new User(userDTO.username,userDTO.password);
+            String hashedPassword = passwordEncoder.encode(userDTO.password);
+            User _user = new User(userDTO.username, hashedPassword);
 
             userRepository.save(_user);
             response.put("message", "Successfully Registered");
@@ -50,7 +54,7 @@ public class UserServiceImp implements UserService{
             return ResponseEntity.status(404).body(response);
         }
 
-        if (!_user.getPassword().equals(userDTO.password)) {
+        if (passwordEncoder.matches(userDTO.password, _user.getPassword())) {
             response.put("message", "Incorrect password");
             return ResponseEntity.status(401).body(response);
         }
