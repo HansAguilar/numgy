@@ -16,18 +16,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'mysql:mysql-connector-java'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
 jar {
     manifest {
         attributes(
@@ -37,11 +32,10 @@ jar {
 }
 
 bootJar {
-    archiveFileName = 'sample-rest-1.0-SNAPSHOT-plain.jar'
     mainClass = 'sb.app.Application'
+    archiveBaseName = 'numgy-server'
 }
 
-// If you need to specify the main class explicitly
 springBoot {
     mainClass = 'sb.app.Application'
 }

@@ -5,10 +5,10 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 
 # Copy the packaged Spring Boot application JAR file into the container
-COPY build/libs/sample-rest-1.0-SNAPSHOT-plain.jar /app
+COPY build/libs/numgy-server-1.0-SNAPSHOT.jar /app
 
 # Expose the port that your Spring Boot application runs on
 EXPOSE 8080
 
 # Specify the command to run your Spring Boot application when the container starts
-CMD ["java", "-jar", "sample-rest-1.0-SNAPSHOT-plain.jar"]
+CMD ["java", "-jar", "numgy-server-1.0-SNAPSHOT.jar"]
