@@ -18,7 +18,7 @@
 #COPY ${JAR_FILE} app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
-FROM openjdk:8-jdk-alpine
+FROM gradle:7.5.1-jdk8-slim
 
 # Set working directory (adjust if your Gradle files are elsewhere)
 WORKDIR /app
