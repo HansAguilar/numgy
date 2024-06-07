@@ -45,11 +45,8 @@ WORKDIR /app
 # Copy Gradle Build Script (if not already in the context)
 COPY build.gradle ./
 
-# Install Gradle (optional, comment out if included in base image)
-# RUN apk add --no-cache gradle
-
 # Run Gradle Build to Generate JAR File
-RUN ./gradlew build
+RUN gradle clean build
 
 # Copy the Generated JAR File
 COPY build/libs/*.jar app.jar
