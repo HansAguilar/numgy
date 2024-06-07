@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .  # Builds the image from the current directory (Dockerfile)
+    ports:
+      - "8080:8080"  # Exposes port 8080 of the container to port 8080 on the host
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-container:3306/numgy  # Sets datasource URL
+    depends_on:
+      - db  # Ensures the db container starts before the app container
+
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: db-container
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes

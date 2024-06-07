@@ -53,7 +53,7 @@ public class UserServiceImp implements UserService{
             return ResponseEntity.status(404).body(response);
         }
 
-        if (userDTO.password.equals(_user.getPassword())) {
+        if (!userDTO.password.equals(_user.getPassword())) {
             response.put("message", "Incorrect password");
             return ResponseEntity.status(401).body(response);
         }
