@@ -1,17 +1,17 @@
-# Use an OpenJDK 8 runtime as the base image
-FROM openjdk:8-jdk-alpine
-
-## Set the working directory in the container
-#WORKDIR /app
-
-# Copy the packaged Spring Boot application JAR file into the container
-COPY build/libs/numgy-server-1.0-SNAPSHOT.jar .
-
-# Expose the port that your Spring Boot application runs on
-#EXPOSE 8080
-
-# Specify the command to run your Spring Boot application when the container starts
-CMD ["java", "-jar", "numgy-server-1.0-SNAPSHOT.jar"]
+## Use an OpenJDK 8 runtime as the base image
+#FROM openjdk:8-jdk-alpine
+#
+### Set the working directory in the container
+##WORKDIR /app
+#
+## Copy the packaged Spring Boot application JAR file into the container
+#COPY build/libs/numgy-server-1.0-SNAPSHOT.jar .
+#
+## Expose the port that your Spring Boot application runs on
+##EXPOSE 8080
+#
+## Specify the command to run your Spring Boot application when the container starts
+#CMD ["java", "-jar", "numgy-server-1.0-SNAPSHOT.jar"]
 
 #FROM openjdk:8-jdk-alpine
 #ARG JAR_FILE=build/libs/*.jar
@@ -34,3 +34,25 @@ CMD ["java", "-jar", "numgy-server-1.0-SNAPSHOT.jar"]
 #
 ## Executable directive (optional, depends on your application)
 #ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+# Base Image with OpenJDK 17 and Slim Alpine Linux
+FROM openjdk:17-slim
+
+# Set Working Directory (adjust if necessary)
+WORKDIR /app
+
+# Copy Gradle Build Script (if not already in the context)
+COPY build.gradle ./
+
+# Install Gradle (optional, comment out if included in base image)
+# RUN apk add --no-cache gradle
+
+# Run Gradle Build to Generate JAR File
+RUN ./gradle build
+
+# Copy the Generated JAR File
+COPY build/libs/*.jar app.jar
+
+# Executable Directive (optional, adjust arguments if needed)
+ENTRYPOINT ["java", "-jar", "app.jar"]
