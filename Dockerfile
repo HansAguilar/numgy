@@ -46,7 +46,7 @@ WORKDIR /app
 COPY build.gradle ./
 
 # Run Gradle Build to Generate JAR File
-RUN gradle clean build
+RUN ./gradle clean build
 
 # Copy the Generated JAR File
 COPY build/libs/*.jar app.jar
