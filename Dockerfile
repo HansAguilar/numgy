@@ -1,5 +1,5 @@
 # Use an OpenJDK 8 runtime as the base image
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk:8-hotspot
 
 # Set the working directory in the container
 WORKDIR /app
