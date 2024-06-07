@@ -5,7 +5,7 @@ FROM openjdk:8-jdk-alpine
 #WORKDIR /app
 
 # Copy the packaged Spring Boot application JAR file into the container
-COPY build/libs/numgy-server-1.0-SNAPSHOT.jar /app
+COPY build/libs/numgy-server-1.0-SNAPSHOT.jar .
 
 # Expose the port that your Spring Boot application runs on
 #EXPOSE 8080
