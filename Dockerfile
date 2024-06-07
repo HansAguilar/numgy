@@ -49,7 +49,7 @@ COPY build.gradle ./
 # RUN apk add --no-cache gradle
 
 # Run Gradle Build to Generate JAR File
-RUN ./gradle build
+RUN ./gradlew build
 
 # Copy the Generated JAR File
 COPY build/libs/*.jar app.jar
