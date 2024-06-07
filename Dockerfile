@@ -18,7 +18,7 @@
 #COPY ${JAR_FILE} app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:8-jdk-alpine
 
 # Set working directory (adjust if your Gradle files are elsewhere)
 WORKDIR /app
@@ -27,7 +27,7 @@ WORKDIR /app
 COPY build.gradle ./
 
 # Run Gradle build to generate JAR file
-RUN ./gradlew bootJar
+RUN ./gradlew build
 
 # Copy the generated JAR file
 COPY build/libs/*.jar app.jar
