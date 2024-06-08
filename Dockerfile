@@ -36,20 +36,12 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
-# Base Image with OpenJDK 17 and Slim Alpine Linux
-FROM openjdk:17-slim
+FROM openjdk:8-jdk-alpine
 
-# Set Working Directory (adjust if necessary)
-WORKDIR /app
+RUN mkdir -p /build
+WORKDIR /build
 
-# Copy Gradle Build Script (if not already in the context)
-COPY build.gradle ./
+COPY /build/target/numgy-server-1.0-SNAPSHOT.jar /app.jar
 
-# Run Gradle Build to Generate JAR File
-RUN ./gradle clean build
-
-# Copy the Generated JAR File
-COPY build/libs/*.jar app.jar
-
-# Executable Directive (optional, adjust arguments if needed)
-ENTRYPOINT ["java", "-jar", "app.jar"]
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
